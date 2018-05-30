@@ -16,12 +16,9 @@ The coefficients, the residual sum of squares and the variance score are also
 calculated.
 
 """
-print(__doc__)
-
 
 # Code source: Jaques Grobler
 # License: BSD 3 clause
-
 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -30,7 +27,6 @@ from sklearn.metrics import mean_squared_error, r2_score
 
 # Load the diabetes dataset
 diabetes = datasets.load_diabetes()
-
 
 # Use only one feature
 diabetes_X = diabetes.data[:, np.newaxis, 2]

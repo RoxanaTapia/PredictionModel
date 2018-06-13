@@ -28,7 +28,7 @@ def filter_values(row):
 
 
 def get_t0(id):
-    content = open('resources/T0.txt').read().decode("utf-8-sig").encode("utf-8").split("\r")
+    content = open('resources/T0.txt', mode='r', encoding="utf-8-sig").read().split('\n')
     for c in content:
         extracted_id, time = c.split(',')
         if extracted_id != id[:7]:
@@ -45,14 +45,23 @@ def read(category, id):
     :return: Patient
     :rtype: Patient
     """
-    f = open(category + "/" + id, 'rb')
-    reader = reversed(list(csv.reader(f)))
+    f = open(category + "/" + id, 'rt')
+    # reader = reversed(list(csv.reader(f))) # before t0
+    reader = list(csv.reader(f))
     t0 = get_t0(id)
     patient = Patient(id=id[:7], t0=t0)
 
+    # before t0
+    # for row in reader:
+    #     time, abp_mean = filter_values(row)
+    #     if time < t0 and len(patient.data) < 300:  # select 300 indexes before t0 as time frame
+    #         patient.add_record(time=time, abp_mean=abp_mean)
+
     for row in reader:
+        if not row:
+            continue
         time, abp_mean = filter_values(row)
-        if time < t0 and len(patient.data) < 300:  # select 300 indexes before t0 as time frame
+        if time > t0 and len(patient.data) < 60:  # 60 values each hour
             patient.add_record(time=time, abp_mean=abp_mean)
 
     f.close()
@@ -74,7 +83,7 @@ def write_matrix(patients, filename):
             row = ""
             for time, abp_mean in p.data.items():
                 row = row + str(abp_mean)
-                if p.data.keys().index(time) + 1 < len(p.data.keys()):
+                if list(p.data.keys()).index(time) + 1 < len(p.data.keys()):
                     row = row + " "
                 elif patients.index(p) + 1 < len(patients):
                     row = row + '\r'
@@ -83,11 +92,15 @@ def write_matrix(patients, filename):
 
 if __name__ == '__main__':
 
-    h1 = load_data('resources/H1')
-    write_matrix(h1, 'h1_matrix.txt')
-    h2 = load_data('resources/H2')
-    write_matrix(h2, 'h2_matrix.txt')
-    c1 = load_data('resources/C1')
-    write_matrix(c1, 'c1_matrix.txt')
+    # h1 = load_data('resources/H1')
+    # # write_matrix(h1, 'h1_matrix.txt')
+    # write_matrix(h1, 'after_t0/h1_matrix.txt')
+    # h2 = load_data('resources/H2')
+    # # write_matrix(h2, 'h2_matrix.txt')
+    # write_matrix(h2, 'after_t0/h2_matrix.txt')
+    # c1 = load_data('resources/C1')
+    # # write_matrix(c1, 'c1_matrix.txt')
+    # write_matrix(c1, 'after_t0/c1_matrix.txt')
     c2 = load_data('resources/C2')
-    write_matrix(c2, 'c2_matrix.txt')
+    # write_matrix(c2, 'c2_matrix.txt')
+    write_matrix(c2, 'after_t0/c2_matrix.txt')

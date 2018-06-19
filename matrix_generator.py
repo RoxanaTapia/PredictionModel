@@ -1,7 +1,7 @@
 import csv
 import os
 from collections import OrderedDict
-
+from wfdb import rdrecord, rdsamp
 from datetime import datetime
 
 
@@ -78,7 +78,7 @@ def load_data(category):
 
 
 def write_matrix(patients, filename):
-    with open('resources/'+filename, 'a') as f:
+    with open('resources/' + filename, 'a') as f:
         for p in patients:
             row = ""
             for time, abp_mean in p.data.items():
@@ -90,8 +90,10 @@ def write_matrix(patients, filename):
             f.write(row)
         f.close()
 
-if __name__ == '__main__':
 
+if __name__ == '__main__':
+    signals, fields = rdsamp('resources/test-set-a/101b/101b_0001', sampfrom=0, sampto='end', channels=[5])
+    print(signals)
     # h1 = load_data('resources/H1')
     # # write_matrix(h1, 'h1_matrix.txt')
     # write_matrix(h1, 'after_t0/h1_matrix.txt')
@@ -101,6 +103,6 @@ if __name__ == '__main__':
     # c1 = load_data('resources/C1')
     # # write_matrix(c1, 'c1_matrix.txt')
     # write_matrix(c1, 'after_t0/c1_matrix.txt')
-    c2 = load_data('resources/C2')
+    # c2 = load_data('resources/C2')
     # write_matrix(c2, 'c2_matrix.txt')
-    write_matrix(c2, 'after_t0/c2_matrix.txt')
+    # write_matrix(c2, 'after_t0/c2_matrix.txt')

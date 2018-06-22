@@ -50,12 +50,23 @@ def read(category, id):
     t0 = get_t0(id)
     patient = Patient(id=id[:7], t0=t0)
 
+    considered_rows = list()
+
     for row in reader:
         time, abp_mean = filter_values(row)
         if time < t0 and len(patient.data) < 600:  # select 300 indexes before t0 as time frame
             patient.add_record(time=time, abp_mean=abp_mean)
-
+            considered_rows.append(row)
     f.close()
+    # output = open(category + "/" + id + '_clean.csv', 'wb')
+    # writer = csv.writer(output)
+    with open("resources/clean_before_t0/" + category.replace('resources/', '') + "/" + id[:7] + '.csv', 'w') as o:
+        rows = reversed(considered_rows)
+        writer = csv.writer(o)
+        for r in rows:
+            writer.writerow(r)
+    o.close()
+
     return patient
 
 
@@ -83,11 +94,11 @@ def write_matrix(patients, filename):
 
 if __name__ == '__main__':
 
-    # h1 = load_data('resources/H1')
+    h1 = load_data('resources/H1')
     # write_matrix(h1, 'h1_matrix.txt')
-    # h2 = load_data('resources/H2')
+    h2 = load_data('resources/H2')
     # write_matrix(h2, 'h2_matrix.txt')
-    # c1 = load_data('resources/C1')
+    c1 = load_data('resources/C1')
     # write_matrix(c1, 'c1_matrix.txt')
     c2 = load_data('resources/C2')
-    write_matrix(c2, 'c2_matrix.txt')
+    # write_matrix(c2, 'c2_matrix.txt')

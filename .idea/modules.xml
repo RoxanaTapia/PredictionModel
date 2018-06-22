@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/PredictionModel.iml" filepath="$PROJECT_DIR$/.idea/PredictionModel.iml" />
       <module fileurl="file://$PROJECT_DIR$/PredictionModel.iml" filepath="$PROJECT_DIR$/PredictionModel.iml" />
     </modules>
   </component>

@@ -1,0 +1,30 @@
+101bn 29 1 36000  1:30:00 21/03/2019
+101bn.dat 16 244.53/bpm 16 0 20296 -24413 0 HR
+101bn.dat 16 192.747(-4818)/bpm 16 0 10216 -28884 0 PULSE
+101bn.dat 16 97.2315(3986)/mmHg 16 0 -32768 -10319 0 ABP
+101bn.dat 16 107.433(-644)/mmHg 16 0 9562 2480 0 ABP Sys
+101bn.dat 16 110.327(110)/mmHg 16 0 4964 8098 0 ABP Dias
+101bn.dat 16 129.004(-129)/mmHg 16 0 7740 3233 0 ABP Mean
+101bn.dat 16 86.2289(3449)/mmHg 16 0 -32768 0 0 CVP
+101bn.dat 16 100(6272933)/unknown 16 0 -32768 0 0 CVP_1/2
+101bn.dat 16 10/unknown 16 0 -32768 0 0 CVP_2/2
+101bn.dat 16 10/unknown 16 0 -32768 0 0 CVP_1/3
+101bn.dat 16 10/unknown 16 0 -32768 0 0 CVP_2/3
+101bn.dat 16 10/unknown 16 0 -32768 0 0 CVP_3/3
+101bn.dat 16 82.3291(3128)/mmHg 16 0 -32768 0 0 PAP
+101bn.dat 16 101.761(407)/mmHg 16 0 -32768 0 0 PAP Sys
+101bn.dat 16 102.078(1224)/mmHg 16 0 -32768 0 0 PAP Dias
+101bn.dat 16 103.366(516)/mmHg 16 0 -32768 0 0 PAP Mean
+101bn.dat 16 537.164(-16652)/mmHg 16 0 -32768 3394 0 NBP
+101bn.dat 16 840.179(-62173)/mmHg 16 0 18484 -23313 0 NBP Sys
+101bn.dat 16 799.195(-30369)/mmHg 16 0 18382 -1560 0 NBP Dias
+101bn.dat 16 992.939(-50639)/mmHg 16 0 16881 20949 0 NBP Mean
+101bn.dat 16 606.796(-1820)/pm 16 0 7889 26436 0 RESP
+101bn.dat 16 595.764(-26809)/% 16 0 32172 7164 0 SpO2
+101bn.dat 16 511.984/? 16 0 2560 8922 0 PVC Rate per Minute
+101bn.dat 16 0.520764(-52)/? 16 0 32763 -15483 0 Rhythm Status
+101bn.dat 16 2978.82(-187817465)/unknown 16 0 23831 16503 0 Ectopic Status_1/2
+101bn.dat 16 1424.65/unknown 16 0 1425 5325 0 Ectopic Status_2/2
+101bn.dat 16 10/unknown 16 0 -32768 0 0 Ectopic Status_1/3
+101bn.dat 16 10/unknown 16 0 -32768 0 0 Ectopic Status_2/3
+101bn.dat 16 10/unknown 16 0 -32768 0 0 Ectopic Status_3/3

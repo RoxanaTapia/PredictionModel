@@ -1,17 +1,16 @@
 import numpy as np
 import os
 
-def has_abp(abps):
 
+def has_abp(abps):
     limit = 30
     for x in range(30):
         chunk = abps[x:limit]
         ahe = list()
         for abp in chunk:
-            if (abp <= 60) and (abp >= 10):
+            if (abp <= 67) and (abp >= 10):
                 ahe.append(abp)
-        # print(chunk)
-        if len(ahe) >= 27:
+        if len(ahe) >= 24:
             return True
         limit = limit + 1
     return False
@@ -26,12 +25,12 @@ if __name__ == '__main__':
     b = np.loadtxt('resources/tests_b_matrix/data_b_after_t0.txt').tolist()
 
     directory = {
-        'resources/abp_results/training_set/c1/': ('results_c1.txt', c1),
-        'resources/abp_results/training_set/c2/': ('results_c2.txt', c2),
-        'resources/abp_results/training_set/h1/': ('results_h1.txt', h1),
-        'resources/abp_results/training_set/h2/': ('results_h2.txt', h2),
-        'resources/abp_results/test_set_a/': ('results_a.txt', a),
-        'resources/abp_results/test_set_b/': ('results_b.txt', b),
+        'resources/ahe_results/training_set/c1/': ('results_c1.txt', c1),
+        'resources/ahe_results/training_set/c2/': ('results_c2.txt', c2),
+        'resources/ahe_results/training_set/h1/': ('results_h1.txt', h1),
+        'resources/ahe_results/training_set/h2/': ('results_h2.txt', h2),
+        'resources/ahe_results/test_set_a/': ('results_a.txt', a),
+        'resources/ahe_results/test_set_b/': ('results_b.txt', b),
     }
 
     for path, content in directory.items():
@@ -39,7 +38,7 @@ if __name__ == '__main__':
             os.makedirs(path)
 
         filename, patients = content
-        file = open(path + filename, 'a')
+        file = open(path + filename, 'w+')
         for patient in patients:
             if has_abp(patient):
                 file.write('T\r')

@@ -58,9 +58,8 @@ def read(category, id):
             patient.add_record(time=time, abp_mean=abp_mean)
             considered_rows.append(row)
     f.close()
-    # output = open(category + "/" + id + '_clean.csv', 'wb')
-    # writer = csv.writer(output)
-    with open("resources/clean_before_t0/" + category.replace('resources/', '') + "/" + id[:7] + '.csv', 'w') as o:
+
+    with open("resources/clean_before_t0/" + category.replace('resources/', '') + "/" + id[:7] + '.csv', 'w+') as o:
         rows = reversed(considered_rows)
         writer = csv.writer(o)
         for r in rows:
@@ -80,9 +79,9 @@ def load_data(category):
 
 
 def write_matrix(patients, filename):
-    with open('resources/'+filename, 'a') as f:
+    with open('resources/'+filename, 'w+') as f:
         for p in patients:
-            row = ""
+            row = p.id + " "
             for time, abp_mean in p.data.items():
                 row = row + str(abp_mean)
                 if list(p.data.keys()).index(time) + 1 < len(p.data.keys()):
@@ -95,10 +94,10 @@ def write_matrix(patients, filename):
 if __name__ == '__main__':
 
     h1 = load_data('resources/H1')
-    # write_matrix(h1, 'h1_matrix.txt')
+    write_matrix(h1, 'h1_matrix.txt')
     h2 = load_data('resources/H2')
-    # write_matrix(h2, 'h2_matrix.txt')
+    write_matrix(h2, 'h2_matrix.txt')
     c1 = load_data('resources/C1')
-    # write_matrix(c1, 'c1_matrix.txt')
+    write_matrix(c1, 'c1_matrix.txt')
     c2 = load_data('resources/C2')
-    # write_matrix(c2, 'c2_matrix.txt')
+    write_matrix(c2, 'c2_matrix.txt')

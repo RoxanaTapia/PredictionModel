@@ -72,6 +72,7 @@ def read(category, id):
 def load_data(category):
     patients = list()
     resources = os.listdir(category)
+    resources.sort()
     for r in resources:
         p = read(category, r)
         patients.append(p)

@@ -49,7 +49,7 @@ def read(category, id):
     f = open(category + "/" + id, 'rt')
     reader = list(csv.reader(f))
     t0 = get_t0(id)
-    patient = Patient(id=id[:7], t0=t0)
+    patient = Patient(id=id[:8], t0=t0)
 
     for row in reader:
         if not row:
@@ -57,8 +57,7 @@ def read(category, id):
         time, abp_mean = filter_values(row)
         # uncomment for trainig set after t0
         # if time >= t0 and len(patient.data) < 60:  # 60 values each hour
-
-        #     # uncoment for test set after t0
+            # uncoment for test set after t0
         if len(patient.data) < 60:  # 60 values each hour
             patient.add_record(time=time, abp_mean=abp_mean)
 
@@ -69,6 +68,7 @@ def read(category, id):
 def load_data(category):
     patients = list()
     resources = os.listdir(category)
+    resources.sort()
     for r in resources:
         p = read(category, r)
         patients.append(p)

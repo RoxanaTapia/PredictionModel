@@ -16,12 +16,14 @@ class Patient:
 
 def filter_values(row):
     try:
-        abp_mean = float(row[4])
+        # abp_mean = float(row[4])
+        abp_mean = float(row[1])
     except ValueError:
         abp_mean = 0
 
     raw_time = str(row[0])[2:10] + " " + str(row[0])[11:21]
-    time = datetime.strptime(raw_time, '%H:%M:%S %d/%m/%Y')
+    # time = datetime.strptime(raw_time, '%H:%M:%S %d/%m/%Y')
+    time = datetime.strptime(raw_time, '%H:%M:%S %Y-%m-%d')
 
     return time, abp_mean
 
@@ -30,7 +32,7 @@ def get_t0(id):
     content = open('resources/T0.txt', mode='r', encoding="utf-8-sig").read().split('\n')
     for c in content:
         extracted_id, time = c.split(',')
-        if extracted_id != id[:7]:
+        if extracted_id != id[:8]:
             continue
         time = datetime.strptime(time, '%d/%m/%Y %H:%M')
         return time
@@ -47,14 +49,18 @@ def read(category, id):
     f = open(category + "/" + id, 'rt')
     reader = list(csv.reader(f))
     t0 = get_t0(id)
-    patient = Patient(id=id[:7], t0=t0)
+    patient = Patient(id=id[:8], t0=t0)
 
     for row in reader:
         if not row:
             continue
         time, abp_mean = filter_values(row)
-        if time >= t0 and len(patient.data) < 60:  # 60 values each hour
-            patient.add_record(time=time, abp_mean=abp_mean)
+        # uncomment for trainig set after t0
+        # if time >= t0 and len(patient.data) < 60:  # 60 values each hour
+
+        #uncoment for test set after t0
+        # if len(patient.data) < 60:  # 60 values each hour
+        patient.add_record(time=time, abp_mean=abp_mean)
 
     f.close()
     return patient
@@ -84,15 +90,28 @@ def write_matrix(patients, filename):
 
 
 if __name__ == '__main__':
-    h1 = load_data('resources/H1')
-    write_matrix(h1, 'h1_matrix.txt')
-    write_matrix(h1, 'after_t0/h1_matrix.txt')
-    h2 = load_data('resources/H2')
-    write_matrix(h2, 'h2_matrix.txt')
-    write_matrix(h2, 'after_t0/h2_matrix.txt')
-    c1 = load_data('resources/C1')
-    write_matrix(c1, 'c1_matrix.txt')
-    write_matrix(c1, 'after_t0/c1_matrix.txt')
-    c2 = load_data('resources/C2')
-    write_matrix(c2, 'c2_matrix.txt')
-    write_matrix(c2, 'after_t0/c2_matrix.txt')
+    # h1 = load_data('resources/H1')
+    # write_matrix(h1, 'h1_matrix.txt')
+    # write_matrix(h1, 'after_t0/h1_matrix.txt')
+    # h2 = load_data('resources/H2')
+    # write_matrix(h2, 'h2_matrix.txt')
+    # write_matrix(h2, 'after_t0/h2_matrix.txt')
+    # c1 = load_data('resources/C1')
+    # write_matrix(c1, 'c1_matrix.txt')
+    # write_matrix(c1, 'after_t0/c1_matrix.txt')
+    # c2 = load_data('resources/C2')
+    # write_matrix(c2, 'c2_matrix.txt')
+    # write_matrix(c2, 'after_t0/c2_matrix.txt')
+
+    # a = load_data('resources/A')
+    # write_matrix(a, 'tests_a_matrix/data_a.txt')
+    #
+    # a = load_data('resources/csv_after_t0_tests/A')
+    # write_matrix(a, 'tests_a_matrix/data_a_after_t0.txt')
+    #
+    # b = load_data('resources/B')
+    # write_matrix(b, 'tests_b_matrix/data_b.txt')
+    #
+    # b = load_data('resources/csv_after_t0_tests/B')
+    # write_matrix(b, 'tests_b_matrix/data_b_after_t0.txt')
+    pass

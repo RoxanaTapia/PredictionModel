@@ -106,27 +106,27 @@ def get_abp_means(input_file):
 if __name__ == '__main__':
 
     # TODO Uncomment for processing data after t0
-    # print("TEST SET A\n")
+    print("TEST SET A\n")
+
+    patients = dict()
+    for i in range(1, 11):
+        digit = str(i).zfill(2)
+        path = "resources/c_signals/test-set-a/1"+digit+"c/1"+digit+"c"
+        print("---------------------------------------------")
+        print("Processing data for: " + path)
+        try:
+            id = path.rsplit('/', 1)[-1]
+            means = get_abp_means(path)
+            patients[id] = means
+        except Exception as e:
+            print("xxxxxxxxxxxx   Something went wrong, skipping data... " + str(e))
+
+    print("---------------------------------------------\n")
+    print("Writing data...")
+    for id, abps in patients.items():
+        write(id, abps, "tests_a_matrix/data_a_after_t0.txt")
+    print("Done.")
     #
-    # patients = dict()
-    # for i in range(1, 11):
-    #     digit = str(i).zfill(2)
-    #     path = "resources/c_signals/test-set-a/1"+digit+"c/1"+digit+"c"
-    #     print("---------------------------------------------")
-    #     print("Processing data for: " + path)
-    #     try:
-    #         id = path.rsplit('/', 1)[-1]
-    #         means = get_abp_means(path)
-    #         patients[id] = means
-    #     except Exception as e:
-    #         print("xxxxxxxxxxxx   Something went wrong, skipping data... " + str(e))
-    #
-    # print("---------------------------------------------\n")
-    # print("Writing data...")
-    # for id, abps in patients.items():
-    #     write(id, abps, "tests_a_matrix/data_a_after_t0.txt")
-    # print("Done.")
-    # #
 
 
     # # Process test set b
@@ -245,17 +245,18 @@ if __name__ == '__main__':
 
     # print("---------------------------------------------\n")
     # Process test set b
-    print("\nTEST SET B\n")
-
-    patients = list()
-    for i in range(1, 41):
-        digit = str(i).zfill(2)
-        path = "resources/c_signals/test-set-b/2" + digit + "c/2" + digit + "c"
-        print("---------------------------------------------")
-        print("Processing data for: " + path)
-        try:
-            id = path.rsplit('/', 1)[-1]
-            output_file = "resources/csv_after_t0_tests/B/{id}.csv".format(id=id)
-            write_csv(path, output_file)
-        except Exception as e:
-            print("xxxxxxxxxxxx   Something went wrong, skipping data... " + str(e))
+    # print("\nTEST SET B\n")
+    #
+    # patients = list()
+    # for i in range(1, 41):
+    #     digit = str(i).zfill(2)
+    #     path = "resources/c_signals/test-set-b/2" + digit + "c/2" + digit + "c"
+    #     print("---------------------------------------------")
+    #     print("Processing data for: " + path)
+    #     try:
+    #         id = path.rsplit('/', 1)[-1]
+    #         output_file = "resources/csv_after_t0_tests/B/{id}.csv".format(id=id)
+    #         write_csv(path, output_file)
+    #     except Exception as e:
+    #         print("xxxxxxxxxxxx   Something went wrong, skipping data... " + str(e))
+    pass

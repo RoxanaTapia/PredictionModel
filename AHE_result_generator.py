@@ -8,9 +8,9 @@ def has_abp(abps):
         chunk = abps[x:limit]
         ahe = list()
         for abp in chunk:
-            if (abp <= 67) and (abp >= 10):
+            if (abp <= 60) and (abp >= 10):
                 ahe.append(abp)
-        if len(ahe) >= 24:
+        if len(ahe) >= 27:
             return True
         limit = limit + 1
     return False

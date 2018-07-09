@@ -81,7 +81,7 @@ def load_data(category):
 def write_matrix(patients, filename):
     with open('resources/'+filename, 'w+') as f:
         for p in patients:
-            row = p.id + " "
+            row = ""
             for time, abp_mean in p.data.items():
                 row = row + str(abp_mean)
                 if list(p.data.keys()).index(time) + 1 < len(p.data.keys()):

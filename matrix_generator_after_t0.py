@@ -49,7 +49,7 @@ def read(category, id):
     f = open(category + "/" + id, 'rt')
     reader = list(csv.reader(f))
     t0 = get_t0(id)
-    patient = Patient(id=id[:8], t0=t0)
+    patient = Patient(id=id[:7], t0=t0)
 
     for row in reader:
         if not row:
@@ -58,9 +58,9 @@ def read(category, id):
         # uncomment for trainig set after t0
         # if time >= t0 and len(patient.data) < 60:  # 60 values each hour
 
-        #uncoment for test set after t0
-        # if len(patient.data) < 60:  # 60 values each hour
-        patient.add_record(time=time, abp_mean=abp_mean)
+        #     # uncoment for test set after t0
+        if len(patient.data) < 60:  # 60 values each hour
+            patient.add_record(time=time, abp_mean=abp_mean)
 
     f.close()
     return patient
@@ -78,7 +78,7 @@ def load_data(category):
 def write_matrix(patients, filename):
     with open('resources/' + filename, 'w+') as f:
         for p in patients:
-            row = p.id + " "
+            row = ""
             for time, abp_mean in p.data.items():
                 row = row + str(abp_mean)
                 if list(p.data.keys()).index(time) + 1 < len(p.data.keys()):
@@ -91,27 +91,26 @@ def write_matrix(patients, filename):
 
 if __name__ == '__main__':
     # h1 = load_data('resources/H1')
-    # write_matrix(h1, 'h1_matrix.txt')
     # write_matrix(h1, 'after_t0/h1_matrix.txt')
+    #
     # h2 = load_data('resources/H2')
-    # write_matrix(h2, 'h2_matrix.txt')
     # write_matrix(h2, 'after_t0/h2_matrix.txt')
+    #
     # c1 = load_data('resources/C1')
-    # write_matrix(c1, 'c1_matrix.txt')
     # write_matrix(c1, 'after_t0/c1_matrix.txt')
+    #
     # c2 = load_data('resources/C2')
-    # write_matrix(c2, 'c2_matrix.txt')
     # write_matrix(c2, 'after_t0/c2_matrix.txt')
 
     # a = load_data('resources/A')
     # write_matrix(a, 'tests_a_matrix/data_a.txt')
     #
-    # a = load_data('resources/csv_after_t0_tests/A')
-    # write_matrix(a, 'tests_a_matrix/data_a_after_t0.txt')
+    a = load_data('resources/csv_after_t0_tests/A')
+    write_matrix(a, 'tests_a_matrix/data_a_after_t0.txt')
     #
     # b = load_data('resources/B')
     # write_matrix(b, 'tests_b_matrix/data_b.txt')
-    #
-    # b = load_data('resources/csv_after_t0_tests/B')
-    # write_matrix(b, 'tests_b_matrix/data_b_after_t0.txt')
+
+    b = load_data('resources/csv_after_t0_tests/B')
+    write_matrix(b, 'tests_b_matrix/data_b_after_t0.txt')
     pass
